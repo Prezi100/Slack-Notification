@@ -1,0 +1,21 @@
+name: Deploy Slack Notification
+on:
+  push:
+      branches:
+          - master
+Jobs:
+    roll-out:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v2
+            - name:roll-out
+            - run: echo "Rolling out this stuff ..."
+            - name: Post to slack channel
+              id: slack
+              uses: slackapi/slack-github-action@v1.25.0
+              with:
+                  channel-id: "C06HUGGFX2M"
+                  slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}" 
+                  env:
+                  SLACK_BOT_TOKEN: ${{ sxoxp-6616672322160-6596343802468-6628810754720-710d7c776e9c7db8da85a59fcbf66900 }
